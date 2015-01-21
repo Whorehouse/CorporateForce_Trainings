@@ -6,6 +6,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.corporateforce.client.config.Config;
+import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class MainBean implements Serializable {
 	}
 
 	public void actionMainPage() throws Exception {
-		this.redirect(PAGE_INDEX);
+		this.redirect(PAGE_WELCOME);
 	}
 	
 
@@ -69,5 +70,76 @@ public class MainBean implements Serializable {
 	
 	public void actionOpenTrainings() throws Exception {
 		this.redirect(Config.getUriModule(MODULE_TRAININGS),true);
+	}
+	
+	//Trainings
+	public static final String TRAININGS_LIST = "/welcome";
+	public static final String TRAININGS_ADD = "/trainings_add";
+	public static final String TRAININGS_EDIT = "/trainings_edit";
+	public static final String TUTORIALS_ADD = "/tutorials_add";
+	public static final String TUTORIALS_EDIT = "/tutorials_edit";
+	public static final String QUESTIONS_ADD = "/questions_add";
+	public static final String QUESTIONS_EDIT = "/questions_edit";
+	public static final String ANSWERS_ADD = "/answers_add";
+	public static final String ANSWERS_EDIT = "/answers_edit";
+	public static final String TRAININGS_START = "/trainings_start";
+	public static final String QUESTIONS_SHOW = "/questions_show";
+	public static final String TRAININGS_END = "/trainings_end";
+	public static final String RESULTS_LIST = "/results_list";
+
+	public void actionTrainingsList() throws Exception {
+		this.redirect(TRAININGS_LIST);
+	}
+
+	public void actionTrainingsAdd() throws Exception {
+		this.redirect(TRAININGS_ADD);
+	}
+
+	public void actionTrainingsEdit() throws Exception {
+		this.redirect(TRAININGS_EDIT);
+	}
+
+	public void actionTutorialsAdd() throws Exception {
+		this.redirect(TUTORIALS_ADD);
+	}
+
+	public void actionTutorialsEdit() throws Exception {
+		this.redirect(TUTORIALS_EDIT);
+	}
+
+	public void actionQuestionsAdd() throws Exception {
+		this.redirect(QUESTIONS_ADD);
+	}
+
+	public void actionQuestionsEdit() throws Exception {
+		this.redirect(QUESTIONS_EDIT);
+	}
+
+	public void actionAnswersAdd() throws Exception {
+		this.redirect(ANSWERS_ADD);
+	}
+
+	public void actionAnswersEdit() throws Exception {
+		this.redirect(ANSWERS_EDIT);
+	}
+
+	public void actionTrainingsStart() throws Exception {
+		this.redirect(TRAININGS_START);
+	}
+
+	public void actionQuestionsShow() throws Exception {
+		this.redirect(QUESTIONS_SHOW);
+	}
+
+	public void actionTrainingsEnd() throws Exception {
+		this.redirect(TRAININGS_END);
+	}
+
+	public void actionResultsList() throws Exception {
+		this.redirect(RESULTS_LIST);
+	}
+	
+	public String removeTags(String income) {
+		return Jsoup.parse(income).text();
 	}
 }

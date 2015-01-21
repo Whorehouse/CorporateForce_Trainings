@@ -24,4 +24,66 @@
 		<view-id value="/view/logout.jsf" />
 	</url-mapping>
 
+	<!-- Trainings -->
+
+	<url-mapping id="trainings_add">
+		<pattern value="/trainings_add" />
+		<view-id value="/view/trainings_add.jsf" />
+	</url-mapping>
+
+	<url-mapping id="trainings_edit">
+		<pattern value="/trainings_edit" />
+		<view-id value="/view/trainings_edit.jsf" />
+	</url-mapping>
+
+	<url-mapping id="tutorials_add">
+		<pattern value="/tutorials_add" />
+		<view-id value="/view/tutorials_add.jsf" />
+	</url-mapping>
+
+	<url-mapping id="tutorials_edit">
+		<pattern value="/tutorials_edit" />
+		<view-id value="/view/tutorials_edit.jsf" />
+	</url-mapping>
+
+	<url-mapping id="questions_add">
+		<pattern value="/questions_add" />
+		<view-id value="/view/questions_add.jsf" />
+	</url-mapping>
+
+	<url-mapping id="questions_edit">
+		<pattern value="/questions_edit" />
+		<view-id value="/view/questions_edit.jsf" />
+	</url-mapping>
+
+	<url-mapping id="answers_add">
+		<pattern value="/answers_add" />
+		<view-id value="/view/answers_add.jsf" />
+	</url-mapping>
+
+	<url-mapping id="answers_edit">
+		<pattern value="/answers_edit" />
+		<view-id value="/view/answers_edit.jsf" />
+	</url-mapping>
+
+	<url-mapping id="trainings_start">
+		<pattern value="/trainings_start" />
+		<view-id value="/view/trainings_start.jsf" />
+	</url-mapping>
+
+	<url-mapping id="questions_show">
+		<pattern value="/questions_show" />
+		<view-id value="/view/questions_show.jsf" />
+	</url-mapping>
+
+	<url-mapping id="trainings_end">
+		<pattern value="/trainings_end" />
+		<view-id value="/view/trainings_end.jsf" />
+	</url-mapping>
+
+	<url-mapping id="results_list">
+		<pattern value="/results_list" />
+		<view-id value="/view/results_list.jsf" />
+	</url-mapping>
+
 </pretty-config>

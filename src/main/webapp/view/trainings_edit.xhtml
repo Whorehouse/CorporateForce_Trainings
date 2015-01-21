@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="/view/templates/trainings.xhtml">
+	<ui:define name="body">
+		<h:form>
+			<p:panel rendered="#{usersBean.isSystemControlAccess()}"
+				style="float:left;width:800px;"
+				header="Редактировать тренинг"
+				styleClass="trainings-edit-panel">
+					<p:panelGrid columns="2">
+						<h:outputLabel for="trainings-name" value="Имя: " />
+						<p:inputText id="trainings-name" class="trainings-name"
+							label="firstname"
+							value="#{trainingsBean.editTrainings.name}" />
+					</p:panelGrid>
+						    <br/>
+					<p:panel header="Туториал">
+						<p:commandButton 
+							value="Редактировать туториал" 
+							rendered="#{trainingsBean.isTutorialed(trainingsBean.editTrainings)}"
+							action="#{mainBean.actionTutorialsEdit}"
+						>
+							<f:setPropertyActionListener 
+								target="#{tutorialsBean.editTutorials}" 
+								value="#{tutorialsBean.getByTrainings(trainingsBean.editTrainings)}"
+							></f:setPropertyActionListener>
+						</p:commandButton>											
+						<p:commandButton 
+							value="Удалить туториал" 
+							rendered="#{trainingsBean.isTutorialed(trainingsBean.editTrainings)}"
+							action="#{tutorialsBean.delete(tutorialsBean.getByTrainings(trainingsBean.editTrainings))}"
+						></p:commandButton>						
+						<p:commandButton 
+							value="Добавить туториал" 
+							rendered="#{!trainingsBean.isTutorialed(trainingsBean.editTrainings)}"
+							action="#{mainBean.actionTutorialsAdd}"
+						></p:commandButton>
+					</p:panel>	
+						    <br/>				
+					<p:panel header="Вопросы">
+						<f:facet name="actions">
+							<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+						    			action="#{mainBean.actionQuestionsAdd}" value="+" alt="Добавить вопрос" title="Добавить вопрос">
+						    </p:commandButton>
+						</f:facet>
+						<p:dataGrid columns="1"
+							var="questions" 
+							value="#{questionsBean.listByTrainings(trainingsBean.editTrainings)}"
+							>
+						    <p:panel style="width:99%;">
+						    	<f:facet name="header">
+						    		<p:outputLabel value="#{fn:substring(mainBean.removeTags(questions.body), 0, 50)}..."></p:outputLabel>
+						    	</f:facet>						    	
+						    	<f:facet name="actions">									
+						    		<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+						    			action="#{questionsBean.delete(questions)}" value="-" alt="Удалить вопрос" title="Удалить вопрос">
+									</p:commandButton>
+						    		<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+						    			action="#{mainBean.actionQuestionsEdit}" value="✐" alt="Редактировать вопрос" title="Редактировать вопрос">
+						    			<f:setPropertyActionListener 
+											target="#{questionsBean.editQuestions}" 
+											value="#{questions}"
+										></f:setPropertyActionListener>
+						    		</p:commandButton>
+						    		<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+						    			action="#{mainBean.actionAnswersAdd}" value="+" alt="Добавить вариант ответа" title="Добавить вариант ответа">
+						    			<f:setPropertyActionListener 
+											target="#{questionsBean.editQuestions}" 
+											value="#{questions}"
+										></f:setPropertyActionListener>
+									</p:commandButton>
+						    	</f:facet>
+						    	<p:dataGrid columns="1"
+									var="answers" 
+									value="#{answersBean.listByQuestions(questions)}"
+									styleClass="answers-items"
+								>
+									<div class="answers-item #{answers.correct ? 'answers-correct' : 'answers-wrong'}">
+							    		<p:outputLabel value="#{fn:substring(answers.body, 0, 50)}..."></p:outputLabel>								
+							    		<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all"
+							    			action="#{answersBean.delete(answers)}" value="-" alt="Удалить ответ" title="Удалить ответ">
+										</p:commandButton>
+							    		<p:commandButton styleClass="ui-panel-titlebar-icon ui-corner-all"
+							    			action="#{mainBean.actionAnswersEdit}" value="✐" alt="Редактировать ответ" title="Редактировать ответ">
+							    			<f:setPropertyActionListener 
+												target="#{answersBean.editAnswers}" 
+												value="#{answers}"
+											></f:setPropertyActionListener>
+							    		</p:commandButton>
+							    	</div>
+								</p:dataGrid>
+						    </p:panel>
+						    <br/>
+						</p:dataGrid>
+					</p:panel>
+						    <br/>
+					<p:commandButton value="Редактировать" action="#{trainingsBean.edit}"></p:commandButton>
+					<p:commandButton value="Отменить" action="#{mainBean.actionMainPage}"></p:commandButton>
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

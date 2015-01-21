@@ -56,8 +56,8 @@ public abstract class AbstractPort<T> {
 	
 	public int count() {
 		RestTemplate restTemplate = new RestTemplate();
-		LinkedHashMap entity = restTemplate.getForObject(Config.getUriServer()+ entityClass.getSimpleName() + "/count", LinkedHashMap.class);
-		return convertToEntity(entity,int.class);
+		int entity = restTemplate.getForObject(Config.getUriServer()+ entityClass.getSimpleName() + "/count", int.class);
+		return entity;
 	}
 	
 	public static <T> List<T> convertToList(List<LinkedHashMap> list, Class<T> converterclass) {
