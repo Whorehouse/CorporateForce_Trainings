@@ -2,13 +2,11 @@ package org.corporateforce.client.jsf;
 
 import java.util.List;
 
-import javax.faces.context.FacesContext;
 
 import org.corporateforce.server.model.Users;
 import org.corporateforce.client.config.Config;
 import org.corporateforce.client.port.ContactsPort;
 import org.corporateforce.client.port.UsersPort;
-import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -82,21 +80,22 @@ public class UsersBean {
 		return u!=null && u.getProfiles()!=null && u.getProfiles().isSystemControl();
 	}
 	
-	public void logout() {
-		currentUser = null;
-	}
-	
-	public void login() {
-		String login = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("login");
-		String password = (String) FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("password");
-		System.out.println("HEEEY Faces Login "+login+" password "+password);
+	public boolean login(String login, String password) {
+		System.out.println("HEY Faces Login "+login+" password "+password);
 		Users res = usersPort.login(login, password);
 		if (res!=null && res.getId()>0) {
 			System.out.println(res);
-			currentUser = res;			
+			currentUser = res;
+			return true;
 		} else {
 			System.out.println("No:"+res);
+			return false;
 		}
+	}
+    
+	public boolean logout() {
+		currentUser = null;
+		return true;
 	}
 	
 	public void updateUser() {

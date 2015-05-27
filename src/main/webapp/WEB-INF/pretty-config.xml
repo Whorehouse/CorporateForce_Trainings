@@ -14,16 +14,6 @@
 		<view-id value="/view/welcome.jsf" />
 	</url-mapping>
 
-	<url-mapping id="login">
-		<pattern value="/login" />
-		<view-id value="/view/login.jsf" />
-	</url-mapping>
-
-	<url-mapping id="logout">
-		<pattern value="/logout" />
-		<view-id value="/view/logout.jsf" />
-	</url-mapping>
-
 	<!-- Trainings -->
 
 	<url-mapping id="trainings_add">
